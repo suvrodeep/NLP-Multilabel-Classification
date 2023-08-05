@@ -113,9 +113,13 @@ class SpacyModel:
     def __init__(self, data=None, model_name=None, train_file=None, val_file=None, test_file=None, config_file=None):
         make_dirs()
         self.df = data
-        self.model_name = model_name
         self.model_output_path = "../trained_pipelines/"
         self.pred_output_file = "../outputs/test_pred.spacy"
+
+        if model_name is None:
+            self.model_name = 'en_core_web_lg'
+        else:
+            self.model_name = model_name
 
         if config_file is None:
             self.config_file = "../config/full_config.cfg"
@@ -145,6 +149,7 @@ class SpacyModel:
 
         preprocess = PreProcess()
         data['desc_title'] = data['title'].astype(str) + " " + data['description'].astype(str)
+        data['desc_title'] = preprocess.spacy_lemmatizer(data=data['desc_title'], model=self.model_name)
         data['desc_title'] = preprocess.spacy_remove_stop_words(
             data=preprocess.common_cleaning_functions(data=data['desc_title']))
 
@@ -158,8 +163,8 @@ class SpacyModel:
         return train_x, val_x, train_y, val_y, test_df
 
     def initialize_docbins(self, generate_test_file=False):
-        train_docs = self.generate_docs(x_values=self.train_x, y_values=self.train_y, model_name='en_core_web_trf')
-        val_docs = self.generate_docs(x_values=self.val_x, y_values=self.val_y, model_name='en_core_web_trf')
+        train_docs = self.generate_docs(x_values=self.train_x, y_values=self.train_y)
+        val_docs = self.generate_docs(x_values=self.val_x, y_values=self.val_y)
         train_doc_bin = DocBin(docs=train_docs)
         val_doc_bin = DocBin(docs=val_docs)
 

@@ -1,0 +1,9 @@
+{
+  "labels":[
+    "Entry Level",
+    "Senior Level",
+    "Internship",
+    "Mid Level"
+  ],
+  "threshold":0.5
+}

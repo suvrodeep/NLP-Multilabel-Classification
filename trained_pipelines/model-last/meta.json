@@ -1,0 +1,76 @@
+{
+  "lang":"en",
+  "name":"pipeline",
+  "version":"0.0.0",
+  "spacy_version":">=3.6.0,<3.7.0",
+  "description":"",
+  "author":"",
+  "email":"",
+  "url":"",
+  "license":"",
+  "spacy_git_version":"6fc153a26",
+  "vectors":{
+    "width":0,
+    "vectors":0,
+    "keys":0,
+    "name":null,
+    "mode":"default"
+  },
+  "labels":{
+    "transformer":[
+
+    ],
+    "textcat_multilabel":[
+      "Entry Level",
+      "Senior Level",
+      "Internship",
+      "Mid Level"
+    ]
+  },
+  "pipeline":[
+    "transformer",
+    "textcat_multilabel"
+  ],
+  "components":[
+    "transformer",
+    "textcat_multilabel"
+  ],
+  "disabled":[
+
+  ],
+  "performance":{
+    "cats_score":0.8254175101,
+    "cats_score_desc":"macro AUC",
+    "cats_micro_p":0.6666666667,
+    "cats_micro_r":0.6896551724,
+    "cats_micro_f":0.6779661017,
+    "cats_macro_p":0.6708333333,
+    "cats_macro_r":0.7807692308,
+    "cats_macro_f":0.6722571783,
+    "cats_macro_auc":0.8254175101,
+    "cats_f_per_type":{
+      "Entry Level":{
+        "p":0.75,
+        "r":1.0,
+        "f":0.8571428571
+      },
+      "Senior Level":{
+        "p":0.6666666667,
+        "r":0.9230769231,
+        "f":0.7741935484
+      },
+      "Internship":{
+        "p":0.6,
+        "r":1.0,
+        "f":0.75
+      },
+      "Mid Level":{
+        "p":0.6666666667,
+        "r":0.2,
+        "f":0.3076923077
+      }
+    },
+    "transformer_loss":0.0163123632,
+    "textcat_multilabel_loss":1.2339957298
+  }
+}

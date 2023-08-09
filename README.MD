@@ -2,7 +2,7 @@
 Predict missing seniority level given the list of jobs (title, description and seniority level)
 
 ### Tech stack
-spaCy NLP pipeline with roBERTa-base model using transfer learning 
+spaCy NLP pipeline with fine-tuned roBERTa-base model using transfer learning 
 and few-shot classification
 
 ### Code files:

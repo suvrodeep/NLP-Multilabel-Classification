@@ -1,2 +1,3 @@
 /.ipynb_checkpoints/
-./notebooks/llm_dev.ipynb
+/trained_pipelines/model-best
+/trained_pipelines/model-last

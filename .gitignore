@@ -1,3 +1,4 @@
 /.ipynb_checkpoints/
 /trained_pipelines/model-best
 /trained_pipelines/model-last
+/notebooks/.ipynb_checkpoints

@@ -110,9 +110,13 @@ class BaselineModel:
 
 
 class SpacyModel:
-    def __init__(self, data=None, model_name=None, train_file=None, val_file=None, test_file=None, config_file=None):
+    def __init__(self, data=None, model_name=None, train_file=None, val_file=None, test_file=None, config_file=None,
+                 preprocess_steps=None):
+        if preprocess_steps is None:
+            preprocess_steps = []
         make_dirs()
         self.df = data
+        self.preprocess_steps = preprocess_steps
         self.model_output_path = "../trained_pipelines/"
         self.pred_output_file = "../outputs/test_pred.spacy"
 
@@ -149,9 +153,19 @@ class SpacyModel:
 
         preprocess = PreProcess()
         data['desc_title'] = data['title'].astype(str) + " " + data['description'].astype(str)
-        data['desc_title'] = preprocess.spacy_lemmatizer(data=data['desc_title'], model=self.model_name)
-        data['desc_title'] = preprocess.spacy_remove_stop_words(
-            data=preprocess.common_cleaning_functions(data=data['desc_title']))
+        if len(self.preprocess_steps) == 0:
+            data['desc_title'] = preprocess.spacy_lemmatizer(data=data['desc_title'], model=self.model_name)
+            data['desc_title'] = preprocess.spacy_remove_stop_words(
+                data=preprocess.common_cleaning_functions(data=data['desc_title']))
+        else:
+            for step in self.preprocess_steps:
+                if step == "remove_stop_words":
+                    data['desc_title'] = preprocess.spacy_remove_stop_words(
+                        data=preprocess.common_cleaning_functions(data=data['desc_title']))
+                elif step == "lemmatize":
+                    data['desc_title'] = preprocess.spacy_lemmatizer(data=data['desc_title'], model=self.model_name)
+                else:
+                    continue
 
         train_df = data.loc[~data['level'].isna()]
         test_df = data.loc[data['level'].isna()]
